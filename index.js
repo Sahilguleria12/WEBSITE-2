@@ -51,7 +51,7 @@ router.get('/sr',function(req,res){
   });
   router.get('/sr1',function(req,res){
     
-    res.render(path.join(__dirname+'/views/login-register.ejs'));
+    res.render(path.join(__dirname+'./views/login-register.ejs'));
   });
 
   router.get('/sr2',function(req,res){
