@@ -23,14 +23,14 @@ app.use(cookieSession({
 // DECLARING CUSTOM MIDDLEWARE
 const ifNotLoggedin = (req, res, next) => {
     if(!req.session.isLoggedIn){
-        return res.render('login-register');
+        return res.render('./views/login-register');
     }
     next();
 }
 
 const ifLoggedin = (req,res,next) => {
     if(req.session.isLoggedIn){
-        return res.redirect('/home');
+        return res.redirect('./views/home');
     }
     next();
 }
@@ -46,7 +46,7 @@ router.get('/',function(req,res){
   });
   
 router.get('/sr',function(req,res){
-    res.sendFile(path.join(__dirname+'/src.html'));
+    res.sendFile(path.join(__dirname+'./views/src.html'));
    // res.sendFile(path.join(__dirname+'/views/login-register.ejs'));
   });
   router.get('/sr1',function(req,res){
@@ -56,12 +56,12 @@ router.get('/sr',function(req,res){
 
   router.get('/sr2',function(req,res){
     
-    res.render(path.join(__dirname+'/views/home.ejs'));
+    res.render(path.join(__dirname+'./views/home.ejs'));
   });
 
   router.get('/sr3',function(req,res){
     
-    res.render(path.join(__dirname+'/views/About.ejs'));
+    res.render(path.join(__dirname+'./views/About.ejs'));
   });
 
   router.get('/sr4',function(req,res){
@@ -73,7 +73,7 @@ router.get('/sr',function(req,res){
   app.use(express.static(path.join(__dirname, 'public')));
 
   
-app.get('/login-register', ifNotLoggedin, (req,res,next) => {
+app.get('./views/login-register', ifNotLoggedin, (req,res,next) => {
     dbConnection.execute("SELECT `name` FROM `users` WHERE `id`=?",[req.session.userID])
     .then(([rows]) => {
         res.render('home',{
